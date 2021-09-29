@@ -3,6 +3,8 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import './Form.css';
 
+const apiKey = process.env.REACT_APP_API_KEY || 'test';
+
 function Form() {
     const [name, setName] = useState('');
     const [protein, setProtein] = useState('');
@@ -20,7 +22,7 @@ function Form() {
                 fat: parseFloat(fat),
                 carbohydrates: parseFloat(carbohydrates)
             };
-            const response = await axios.post('https://fooddb-node.herokuapp.com/api/ingredients', newIngredient);
+            const response = await axios.post(`https://fooddb-node.herokuapp.com/api/ingredients?apiKey=${apiKey}`, newIngredient);
             console.log('OK :) ', response);
             toast.success(`Pomyślnie dodano skladnik '${name}'`);
 
